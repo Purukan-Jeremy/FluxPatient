@@ -1,24 +1,13 @@
 import React, { useEffect, useState } from "react";
-
+import Database from "./config/database/index.js";
+import "./App.css";
+import Dashboard from "./components/Dashboard/index.js";
 function App() {
-  const [backendData, setBackendData] = useState([{}]);
 
-  useEffect(() => {
-    fetch("/api/users")
-      .then((response) => response.json())
-      .then((data) => setBackendData(data))
-      .then((data) => console.log(data));
-  }, []);
   return (
     <div>
-      {(typeof backendData.users === "undefined") ?(
-        <p>Loading...</p>
-      ) : (
-        backendData.users.map((user, i) => (
-          <p key={i}>
-            {user}</p>
-        ))
-      )}
+      <Dashboard/>
+      <Database/>
     </div>
   );
 }
