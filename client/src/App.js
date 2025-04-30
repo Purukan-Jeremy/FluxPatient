@@ -4,13 +4,18 @@ import "./App.css";
 import Dashboard from "./components/Navbar/index.js";
 import Home from "./components/Home/index.js";
 import SymptomChecker from "./components/Symptom/index.js";
+import DoctorDetail from "./components/DoctorsProfile/index.js";
+import Doctors from "./components/Doctors/index.js";
+
 function App() {
   return (
     <div>
       {/* <Dashboard/> */}
-      <SymptomChecker/>
+      {/* <SymptomChecker/> */}
       {/* <Home/> */}
-      <Database/>
+      {/* <Database/> */}
+      {/* <DoctorDetail /> */}
+      <Doctors />
     </div>
   );
 }

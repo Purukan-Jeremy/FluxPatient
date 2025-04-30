@@ -2,6 +2,7 @@ import React from "react";
 import DoctorsComponent from "../../assets/styles/DoctorsComponent.css";
 import gambar from "../../assets/img/gambar.jpg";
 import Navbar from "../Navbar";
+import Header from "../Header";
 
 const doctors = [
   {
@@ -58,9 +59,7 @@ const DoctorCard = ({ name, specialty, image }) => (
 const Doctors = () => {
   return (
     <div className="page-container">
-      <Navbar />
-
-      <h2 className="page-title">Meet Our Doctors</h2>
+      <Header title="Meet Our Doctors" />
 
       <div className="doctors-grid">
         {doctors.map((doc, index) => (
