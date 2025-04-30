@@ -1,46 +1,49 @@
 import React from "react";
 import DoctorsComponent from "../../assets/styles/DoctorsComponent.css";
+import gambar from "../../assets/img/gambar.jpg";
+import Navbar from "../Navbar";
+import Header from "../Header";
 
 const doctors = [
   {
     name: "dr. Richard Lee",
     specialty: "DERMATOLOGIST",
-    image: "./assets/gambar.jpg",
+    image: gambar,
   },
   {
     name: "dr. Theo M. Hudi",
     specialty: "GASTROENTEROLOGIST",
-    image: "./assets/gambar.jpg",
+    image: gambar,
   },
   {
     name: "dr. Alimni Anaya",
     specialty: "NEUROLOGY",
-    image: "./assets/gambar.jpg",
+    image: gambar,
   },
   {
     name: "dr. Hilda Pilar",
     specialty: "CARDIOLOGIST",
-    image: "./assets/gambar.jpg",
+    image: gambar,
   },
   {
     name: "dr. Marcel Sornpton",
     specialty: "OPHTALMOLOGIST",
-    image: "./assets/gambar.jpg",
+    image: gambar,
   },
   {
     name: "dr. Matthew Molekulanang",
     specialty: "PEDIATRICIAN",
-    image: "./assets/gambar.jpg",
+    image: gambar,
   },
   {
     name: "dr. Pichan Molekilang",
     specialty: "PSYCHIATRIST",
-    image: "./assets/gambar.jpg",
+    image: gambar,
   },
   {
     name: "dr. Harah Away",
     specialty: "ONCOLOGIST",
-    image: "./assets/gambar.jpg",
+    image: gambar,
   },
 ];
 
@@ -56,13 +59,7 @@ const DoctorCard = ({ name, specialty, image }) => (
 const Doctors = () => {
   return (
     <div className="page-container">
-      <header className="header">
-        <div className="logo">+ </div>
-        <input type="text" placeholder="Search..." className="search-bar" />
-        <div className="profile-icon" />
-      </header>
-
-      <h2 className="page-title">Meet Our Doctors</h2>
+      <Header title="Meet Our Doctors" />
 
       <div className="doctors-grid">
         {doctors.map((doc, index) => (
