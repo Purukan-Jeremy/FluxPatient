@@ -5,7 +5,6 @@ import Dashboard from "./components/Navbar/index.js";
 import Home from "./components/Home/index.js";
 import SymptomChecker from "./components/Symptom/index.js";
 function App() {
-
   return (
     <div>
       {/* <Dashboard/> */}
