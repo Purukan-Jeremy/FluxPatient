@@ -1,27 +1,17 @@
 import React, { useEffect, useState } from "react";
-
+import Database from "./config/database/index.js";
+import "./App.css";
+import Dashboard from "./components/Navbar/index.js";
+import Home from "./components/Home/index.js";
+import SymptomChecker from "./components/Symptom/index.js";
 function App() {
-  const [backendData, setbackendData] = useState([]);
-
-  useEffect(() => {
-    fetch("/api/users")
-      .then((response) => response.json())
-      .then((data) => setbackendData(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
 
   return (
-    <div className="App">
-      <h1>Daftar Pengguna</h1>
-      <ul>
-        {backendData.length > 0 ? (
-          backendData.map((user) => (
-            <li key={user.id}>{user.name}</li>
-          ))
-        ) : (
-          <li>Loading data...</li>
-        )}
-      </ul>
+    <div>
+      {/* <Dashboard/> */}
+      <SymptomChecker/>
+      {/* <Home/> */}
+      <Database/>
     </div>
   );
 }
