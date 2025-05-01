@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Database from "./config/database/index.js";
 import "./App.css";
+import Queue from "./components/Queue/index.js";
 import Dashboard from "./components/Navbar/index.js";
 import Home from "./components/Home/index.js";
 import SymptomChecker from "./components/Symptom/index.js";
@@ -11,10 +12,8 @@ function App() {
   return (
     <div>
       {/* <Dashboard/> */}
-      {/* <SymptomChecker/> */}
-      {/* <Home/> */}
-      {/* <Database/> */}
-      {/* <DoctorDetail /> */}
+      <Queue />
+      <Database />
       <Doctors />
     </div>
   );

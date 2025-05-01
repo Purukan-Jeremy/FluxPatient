@@ -1,0 +1,32 @@
+.queue-header {
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+.queue-card {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.queue-details p {
+  margin: 0.3rem 0;
+}
+
+.queue-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.queue-number span {
+  font-size: 2rem;
+  color: #000;
+  margin-top: 0.5rem;
+}
