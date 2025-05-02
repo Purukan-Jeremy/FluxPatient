@@ -18,6 +18,7 @@ function App() {
       <Home />
       <Personal/>
       <Footer/>
+      <SymptomChecker/>
     </div>
   );
 }

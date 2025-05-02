@@ -220,11 +220,14 @@ textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 0.9rem;
   outline: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensures consistent width calculation */
 }
+
 
 .dob-inputs {
   display: flex;
@@ -235,6 +238,27 @@ textarea {
 textarea {
   height: 80px;
   resize: none;
+}
+
+.date-picker-container {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.date-picker-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.date-picker-input:focus {
+  border-color: #3b4bff;
+  box-shadow: 0 0 5px rgba(59, 75, 255, 0.5);
 }
 
 .submit-button {

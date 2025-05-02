@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Personal = () => {
+  const [dob, setDob] = useState(null);
+
   return (
     <div className="form-container">
       <h1>Personal Information</h1>
       <form className="form">
-        {/* Name */}
         <label htmlFor="name">Name</label>
         <input type="text" id="name" placeholder="Write your name" />
 
-        {/* Date of Birth */}
         <label htmlFor="dob">Date of Birth</label>
-        <div className="dob-inputs">
-          <input type="text" id="day" placeholder="DD" maxLength="2" />
-          <input type="text" id="month" placeholder="MM" maxLength="2" />
-          <input type="text" id="year" placeholder="YYYY" maxLength="4" />
+        <div className="dob-input">
+          <DatePicker
+            selected={dob}
+            onChange={(date) => setDob(date)}
+            dateFormat="dd/MM/yyyy"
+            placeholderText="dd/mm/yyyy"
+            className="date-picker-input"
+            maxDate={new Date()}
+          />
         </div>
 
-        {/* Gender */}
         <label htmlFor="gender">Gender</label>
         <select id="gender">
           <option value="" disabled selected>
@@ -28,15 +34,12 @@ const Personal = () => {
           <option value="other">Other</option>
         </select>
 
-        {/* Address */}
         <label htmlFor="address">Address</label>
         <input type="text" id="address" placeholder="Write your address" />
 
-        {/* Phone Number */}
         <label htmlFor="phone">Phone Number</label>
         <input type="text" id="phone" placeholder="Write your phone number" />
 
-        {/* Treatment */}
         <label htmlFor="treatment">Treatment</label>
         <select id="treatment">
           <option value="" disabled selected>
@@ -48,11 +51,9 @@ const Personal = () => {
           <option value="therapy">Therapy</option>
         </select>
 
-        {/* Concern */}
         <label htmlFor="concern">What is Your Concern?</label>
         <textarea id="concern" placeholder="Description of your symptom"></textarea>
 
-        {/* Submit Button */}
         <button type="submit" className="submit-button">
           Submit
         </button>
