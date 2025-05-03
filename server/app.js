@@ -14,7 +14,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-
 app.use("/api", usersController);
 app.listen(5000, () => {
   console.log("Server is running on port 5000");
