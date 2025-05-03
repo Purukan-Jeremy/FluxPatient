@@ -1,11 +1,16 @@
 import React from 'react'
 import Navbar from '../Navbar'
 import Home from '../Home'
+import Personal from '../Personal'
+import Footer from '../Footer'
 
 const Dashboard = () => {
   return (
     <div>
-      <Dashboard/>
+      <Navbar />
+      <Home />
+      <Personal/>
+      <Footer/>
     </div>
   )
 }
