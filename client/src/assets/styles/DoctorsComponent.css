@@ -5,48 +5,12 @@
   font-family: sans-serif;
 }
 
-.header {
-  background-color: #3b82f6;
-  color: white;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.search-bar {
-  width: 50%;
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
-  border: none;
-  outline: none;
-}
-
-.profile-icon {
-  width: 2rem;
-  height: 2rem;
-  background-color: white;
-  border-radius: 9999px;
-}
-
-.page-title {
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #3b82f6;
-  margin: 1.5rem 0;
-}
-
 .doctors-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.5rem;
   padding: 0 2rem 2rem;
+  margin-top: 1.5rem;
 }
 
 .doctor-card {
