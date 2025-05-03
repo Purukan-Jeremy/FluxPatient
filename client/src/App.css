@@ -39,17 +39,22 @@
 }
 
 .navbar-link {
-  color: white;
-  text-decoration: none;
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  color: white; /* Link color */
   font-size: 1.3rem;
+  cursor: pointer; /* Make the text clickable */
   margin-left: 2rem;
   margin-right: 2rem;
+  text-decoration: none;
+  padding: 0; /* Remove padding */
 }
 
 .navbar-link:hover {
-  text-decoration: unset;
-  color: #6cddff;
+  text-decoration: underline; /* Optional: Add underline on hover */
+  color: #6cddff; /* Change color on hover */
 }
+
 
 .navbar-right {
   display: flex;
