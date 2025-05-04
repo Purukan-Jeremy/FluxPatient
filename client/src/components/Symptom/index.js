@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./SymptomChecker.css";
 import Fever from "../../assets/img/Fever.png";
 import Chestpain from "../../assets/img/ChestPain.png";
@@ -15,93 +16,53 @@ import Header from "../Header";
 const SymptomChecker = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [symptoms, setSymptoms] = useState([]);
 
-  const symptoms = [
-    {
-      name: "Fever",
-      color: "#B0D2D4",
-      image: Fever,
-      align: "right",
-      description:
-        "Fever is a temporary increase in your body temperature, often due to an infection. It is a common sign that your immune system is fighting off illness.",
-    },
-    {
-      name: "Pneumonia",
-      color: "#7B9AFD",
-      image: Pneumonia,
-      align: "left",
-      description:
-        "Pneumonia is an infection that inflames the air sacs in one or both lungs, which may fill with fluid or pus, causing cough with phlegm, fever, and difficulty breathing.",
-    },
-    {
-      name: "Stroke",
-      color: "#7276B5",
-      image: Stroke,
-      align: "right",
-      description:
-        "Stroke occurs when the blood supply to part of your brain is interrupted or reduced, preventing brain tissue from getting oxygen and nutrients, which can lead to brain damage.",
-    },
-    {
-      name: "Influenza",
-      color: "#64549B",
-      image: Influenza,
-      align: "left",
-      description:
-        "Influenza is a contagious respiratory illness caused by influenza viruses. It can cause mild to severe illness and at times can lead to hospitalization or even death.",
-    },
-    {
-      name: "Asthma",
-      color: "#C9C6FD",
-      image: Asthma,
-      align: "right",
-      description:
-        "Asthma is a condition in which your airways narrow, swell, and produce extra mucus, making breathing difficult and triggering coughing, wheezing, and shortness of breath.",
-    },
-    {
-      name: "Chest Pain",
-      color: "#F9EFF0",
-      image: Chestpain,
-      align: "left",
-      description:
-        "Chest pain can be a symptom of many serious conditions, including heart attack, angina, and lung problems. It should always be evaluated by a healthcare professional.",
-    },
-    {
-      name: "Malaria",
-      color: "#FEF898",
-      image: Malaria,
-      align: "right",
-      description:
-        "Malaria is a serious disease caused by a parasite and transmitted through the bite of infected mosquitoes. It causes chills, fever, and flu-like symptoms, and can be life-threatening if untreated.",
-    },
-    {
-      name: "Gerd",
-      color: "#FEA497",
-      image: Gerd,
-      align: "left",
-      description:
-        "GERD (Gastroesophageal Reflux Disease) is a chronic digestive disorder where stomach acid frequently flows back into the tube connecting your mouth and stomach, causing irritation and discomfort.",
-    },
-    {
-      name: "Sepsis",
-      color: "#FEDFFE",
-      image: Sepsis,
-      align: "right",
-      description:
-        "Sepsis is a life-threatening condition that occurs when the body's response to an infection causes widespread inflammation. It can lead to organ failure and requires immediate medical treatment.",
-    },
-    {
-      name: "Diarrhea",
-      color: "#C48888",
-      image: Diarhea,
-      align: "left",
-      description:
-        "Diarrhea is a condition characterized by frequent, loose, or watery stools. It is commonly caused by infections, food poisoning, or other digestive disorders, and can lead to dehydration if not treated.",
-    },
-  ];
+  useEffect(() => {
+    const fetchSymptoms = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/symptoms");
+        setSymptoms(response.data.data);
+      } catch (error) {
+        console.error("Error fetching symptoms:", error);
+      }
+    };
+
+    fetchSymptoms();
+  }, []);
 
   const filteredSymptoms = symptoms.filter((symptom) =>
-    symptom.name.toLowerCase().includes(searchTerm.toLowerCase())
+    symptom.nama_gejala.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const getImagePath = (name) => {
+    switch (name.toLowerCase()) {
+      case "fever":
+        return Fever;
+      case "pneumonia":
+        return Pneumonia;
+      case "stroke":
+        return Stroke;
+      case "influenza":
+        return Influenza;
+      case "asthma":
+        return Asthma;
+      case "chest pain":
+        return Chestpain;
+      case "malaria":
+        return Malaria;
+      case "gerd":
+        return Gerd;
+      case "sepsis":
+        return Sepsis;
+      case "diarrhea":
+        return Diarhea;
+      default:
+        return null;
+    }
+  };
+
+  const leftAlignSymptoms = ["pneumonia", "influenza", "chest pain", "gerd", "diarrhea"];
 
   return (
     <div className="symptom-checker">
@@ -117,24 +78,26 @@ const SymptomChecker = () => {
             >
               <div
                 className="symptom-card"
-                style={{ backgroundColor: symptom.color }}
+                style={{ backgroundColor: symptom.color || "#F5F5F5" }}
               >
                 {hoveredIndex === index && (
-                  <div className="symptom-description">
-                    {symptom.description}
-                  </div>
+                  <div className="symptom-description">{symptom.deskripsi}</div>
                 )}
                 <img
-                  src={symptom.image}
-                  alt={symptom.name}
+                  src={getImagePath(symptom.nama_gejala)} 
+                  alt={symptom.nama_gejala}
                   className="symptom-image"
                 />
                 <div
                   className={`symptom-name ${
-                    symptom.align === "right" ? "right" : "left"
+                    leftAlignSymptoms.includes(
+                      symptom.nama_gejala.toLowerCase()
+                    )
+                      ? "left"
+                      : "right"
                   }`}
                 >
-                  {symptom.name}
+                  {symptom.nama_gejala}
                 </div>
               </div>
             </div>
