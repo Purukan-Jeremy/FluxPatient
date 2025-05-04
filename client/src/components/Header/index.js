@@ -1,16 +1,25 @@
 import React from "react";
 import Logo from "../../assets/img/fluxLogo.png";
 
-const Header = ({ searchTerm, setSearchTerm, title }) => {
+const Header = ({ searchTerm, setSearchTerm }) => {
   const styles = {
     header: {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100%",
+      maxWidth: "100vw",
+      overflowX: "hidden", 
+      zIndex: "1000",
       backgroundColor: "#3b4bff",
       padding: "16px",
       paddingBottom: "24px",
       borderBottomLeftRadius: "50px",
       borderBottomRightRadius: "50px",
       boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+      boxSizing: "border-box", 
     },
+
     headerContent: {
       display: "flex",
       alignItems: "center",
@@ -119,7 +128,7 @@ const Header = ({ searchTerm, setSearchTerm, title }) => {
             </svg>
           </div>
         </div>
-        <h1 style={styles.headerTitle}>{title}</h1>
+        <h1 style={styles.headerTitle}>Check Your Symptom</h1>
       </div>
     </div>
   );

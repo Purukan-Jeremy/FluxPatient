@@ -8,6 +8,8 @@ import Influenza from "../../assets/img/Influenza.png";
 import Asthma from "../../assets/img/Asthma.png";
 import Malaria from "../../assets/img/Malaria.png";
 import Gerd from "../../assets/img/Gerd.png";
+import Sepsis from "../../assets/img/Sepsis.png";
+import Diarhea from "../../assets/img/Diarhea.png";
 import Header from "../Header";
 
 const SymptomChecker = () => {
@@ -79,6 +81,22 @@ const SymptomChecker = () => {
       description:
         "GERD (Gastroesophageal Reflux Disease) is a chronic digestive disorder where stomach acid frequently flows back into the tube connecting your mouth and stomach, causing irritation and discomfort.",
     },
+    {
+      name: "Sepsis",
+      color: "#FEDFFE",
+      image: Sepsis,
+      align: "right",
+      description:
+        "Sepsis is a life-threatening condition that occurs when the body's response to an infection causes widespread inflammation. It can lead to organ failure and requires immediate medical treatment.",
+    },
+    {
+      name: "Diarrhea",
+      color: "#C48888",
+      image: Diarhea,
+      align: "left",
+      description:
+        "Diarrhea is a condition characterized by frequent, loose, or watery stools. It is commonly caused by infections, food poisoning, or other digestive disorders, and can lead to dehydration if not treated.",
+    },
   ];
 
   const filteredSymptoms = symptoms.filter((symptom) =>
@@ -101,6 +119,11 @@ const SymptomChecker = () => {
                 className="symptom-card"
                 style={{ backgroundColor: symptom.color }}
               >
+                {hoveredIndex === index && (
+                  <div className="symptom-description">
+                    {symptom.description}
+                  </div>
+                )}
                 <img
                   src={symptom.image}
                   alt={symptom.name}
@@ -114,9 +137,6 @@ const SymptomChecker = () => {
                   {symptom.name}
                 </div>
               </div>
-              {hoveredIndex === index && (
-                <div className="symptom-description">{symptom.description}</div>
-              )}
             </div>
           ))
         ) : (
