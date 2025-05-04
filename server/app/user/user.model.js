@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
 
 //Buat Schema
-const userSchema = mongoose.Schema(
+const pasienSchema = mongoose.Schema(
   {
-    name: { type: String, required: true },
-    age: Number,
-    status: String,
+    nama: { type: String, required: true },
+    tanggallahir: String,
+    alamat: String,
+    umur: Number,
+    hp: String,
+    gender: String,
   },
   {
     versionKey: false,
@@ -14,6 +17,6 @@ const userSchema = mongoose.Schema(
 );
 
 //Buat Model
-const User = mongoose.model("User", userSchema);
+const Pasien = mongoose.model("Pasien", pasienSchema);
 
-module.exports = User;
+module.exports = Pasien;
