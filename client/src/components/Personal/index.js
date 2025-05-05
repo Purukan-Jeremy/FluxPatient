@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const Personal = () => {
   const [dob, setDob] = useState(null);
-
   return (
     <div className="form-container">
       <h1>Personal Information</h1>
@@ -52,7 +51,10 @@ const Personal = () => {
         </select>
 
         <label htmlFor="concern">What is Your Concern?</label>
-        <textarea id="concern" placeholder="Description of your symptom"></textarea>
+        <textarea
+          id="concern"
+          placeholder="Description of your symptom"
+        ></textarea>
 
         <button type="submit" className="submit-button">
           Submit
