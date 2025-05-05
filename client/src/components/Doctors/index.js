@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import DoctorsComponent from "../../assets/styles/DoctorsComponent.css";
 import gambar from "../../assets/img/gambar.jpg";
-import Navbar from "../Navbar";
 import Header from "../Header";
 
 const doctors = [
@@ -57,12 +56,23 @@ const DoctorCard = ({ name, specialty, image }) => (
 );
 
 const Doctors = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredDoctors = doctors.filter((doc) =>
+    doc.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    doc.specialty.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="page-container">
-      <Header title="Meet Our Doctors" />
+      <Header
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        title="Meet Our Doctors"
+      />
 
       <div className="doctors-grid">
-        {doctors.map((doc, index) => (
+        {filteredDoctors.map((doc, index) => (
           <DoctorCard
             key={index}
             name={doc.name}
