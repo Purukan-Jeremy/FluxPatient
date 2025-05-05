@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../../assets/img/fluxLogo.png";
 import { MdSearch } from "react-icons/md";
 
-const Header = ({ searchTerm, setSearchTerm }) => {
+const Header = ({ searchTerm, setSearchTerm, title }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 768);
 
@@ -62,7 +61,7 @@ const Header = ({ searchTerm, setSearchTerm }) => {
     searchInput: {
       width: "100%",
       padding: isMobile ? "6px 12px" : "8px 16px",
-      paddingRight: "40px", // space for icon inside
+      paddingRight: "40px",
       borderRadius: "20px",
       border: "none",
       fontSize: isMobile ? "13px" : "14px",
@@ -113,7 +112,6 @@ const Header = ({ searchTerm, setSearchTerm }) => {
     <div>
       <div style={styles.header}>
         <div style={styles.headerContent}>
-          {/* Search (centered) */}
           <div style={styles.searchWrapper}>
             <div style={styles.searchContainer}>
               <input
@@ -130,8 +128,7 @@ const Header = ({ searchTerm, setSearchTerm }) => {
           </div>
         </div>
 
-        {/* Title */}
-        <h1 style={styles.headerTitle}>Check Your Symptom</h1>
+        <h1 style={styles.headerTitle}>{title}</h1>
       </div>
     </div>
   );
