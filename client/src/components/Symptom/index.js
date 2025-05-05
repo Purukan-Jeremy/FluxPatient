@@ -62,11 +62,21 @@ const SymptomChecker = () => {
     }
   };
 
-  const leftAlignSymptoms = ["pneumonia", "influenza", "chest pain", "gerd", "diarrhea"];
+  const leftAlignSymptoms = [
+    "pneumonia",
+    "influenza",
+    "chest pain",
+    "gerd",
+    "diarrhea",
+  ];
 
   return (
     <div className="symptom-checker">
-      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Header
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        title="Check Your Symptom"
+      />
       <div className="symptom-grid">
         {filteredSymptoms.length > 0 ? (
           filteredSymptoms.map((symptom, index) => (
@@ -84,7 +94,7 @@ const SymptomChecker = () => {
                   <div className="symptom-description">{symptom.deskripsi}</div>
                 )}
                 <img
-                  src={getImagePath(symptom.nama_gejala)} 
+                  src={getImagePath(symptom.nama_gejala)}
                   alt={symptom.nama_gejala}
                   className="symptom-image"
                 />
