@@ -39,7 +39,7 @@
 }
 
 .navbar-link {
-  background: none; /* Remove background */
+  background: none;
   border: none; /* Remove border */
   color: white; /* Link color */
   font-size: 1.3rem;
