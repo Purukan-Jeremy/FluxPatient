@@ -41,7 +41,7 @@ const Queue = () => {
 
   // ⏳ Timer update setiap detik (countdown dan hapus expired)
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setInterval(async () => {
       const now = Date.now();
       setQueueData((prevData) => {
         const filtered = prevData
@@ -49,7 +49,16 @@ const Queue = () => {
             ...item,
             remaining: Math.max(0, item.expireTime - now),
           }))
-          .filter((item) => item.expireTime > now);
+          .filter((item) => {
+            if (item.expireTime <= now) {
+              // Delete from MongoDB when queue expires
+              fetch(`http://localhost:5000/api/pasien/${item.mongoId}`, {
+                method: 'DELETE',
+              }).catch(err => console.error('Error deleting patient:', err));
+              return false;
+            }
+            return true;
+          });
 
         localStorage.setItem("queue", JSON.stringify(filtered));
         return filtered;
