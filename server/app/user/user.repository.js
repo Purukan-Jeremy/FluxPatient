@@ -24,6 +24,17 @@ const updateById = async (id, data) => {
   return await Pasien.findByIdAndUpdate(id, data, { new: true });
 };
 
+exports.getActiveQueue = async () => {
+  const now = Date.now();
+  return await Pasien.find({ expireTime: { $gt: now } });
+};
+
+exports.deleteExpiredQueue = async () => {
+  const now = Date.now();
+  return await Pasien.deleteMany({ expireTime: { $lte: now } });
+};
+
+
 module.exports = {
   findAll,
   findById,

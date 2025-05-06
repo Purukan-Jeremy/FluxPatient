@@ -2,12 +2,13 @@
 
 const express = require("express");
 const router = express.Router();
-const {
-  getPasienById,
-  getAllPasiens,
-  createPasien,
-  deletePasien,
+const { 
+  getPasienById, 
+  getAllPasiens, 
+  createPasien, 
+  deletePasien, 
   updatePasien,
+  removeExpiredPatients 
 } = require("./user.service");
 
 /* GET pasien listing. */
@@ -65,6 +66,22 @@ router.delete("/pasien/:id", async (req, res) => {
     });
   } catch (error) {
     res.status(404).json({ status: "error", message: error.message });
+  }
+});
+
+router.delete("/pasien/expired", async (req, res) => {
+  try {
+    const result = await removeExpiredPatients();
+    res.json({
+      status: "success",
+      message: "Expired patients removed successfully",
+      data: result
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      status: "error", 
+      message: error.message 
+    });
   }
 });
 

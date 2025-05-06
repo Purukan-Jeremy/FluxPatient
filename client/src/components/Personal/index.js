@@ -24,7 +24,7 @@ const Personal = () => {
     const pasienPayload = {
       nama: formData.nama,
       alamat: formData.alamat,
-      umur: parseInt(formData.umur, 10), // Konversi umur ke number
+      umur: parseInt(formData.umur, 10), 
       hp: formData.hp,
       gender: formData.gender,
       treatment: formData.treatment,
@@ -32,7 +32,19 @@ const Personal = () => {
     };
 
     console.log("Payload pasien yang dikirim:", pasienPayload); // Debugging
-
+  
+      const antrianPayload = {
+        nama: formData.nama,
+        alamat: formData.alamat,
+        umur: parseInt(formData.umur, 10), 
+        hp: formData.hp,
+        gender: formData.gender,
+        treatment: formData.treatment,
+        deskripsi: formData.deskripsi,
+      };
+  
+      console.log("Payload antrian yang dikirim:", antrianPayload); // Debugging
+  
     try {
       const pasienResponse = await fetch("http://localhost:5000/api/pasien", {
         method: "POST",
@@ -50,12 +62,13 @@ const Personal = () => {
       const pasienResult = await pasienResponse.json();
       console.log("Respons dari backend:", pasienResult); // Debugging
       alert("Kamu Telah Ditambahkan Di antrian!");
-      navigate("/Queue");
+      navigate("/Queue", { state: { pasien: formData } });
     } catch (error) {
       console.error("Error submitting data:", error.message);
       alert(`Failed to submit: ${error.message}`);
     }
   };
+
 
   return (
     <div className="form-container">
