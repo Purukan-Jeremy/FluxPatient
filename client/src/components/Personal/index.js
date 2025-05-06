@@ -50,7 +50,15 @@ const Personal = () => {
       const pasienResult = await pasienResponse.json();
       console.log("Respons dari backend:", pasienResult); // Debugging
       alert("Kamu Telah Ditambahkan Di antrian!");
-      navigate("/Queue");
+      // Pass the MongoDB ID to the Queue component
+      navigate("/Queue", {
+        state: {
+          pasien: {
+            ...formData,
+            mongoId: pasienResult.data._id,
+          },
+        },
+      });
     } catch (error) {
       console.error("Error submitting data:", error.message);
       alert(`Failed to submit: ${error.message}`);

@@ -16,8 +16,7 @@ const App = () => {
         <Route path="/Queue" element={<Queue />} />
         <Route path="/Symptom" element={<Symptom />} />
         <Route path="/DoctorsP" element={<DoctorsP />} />
-        <Route path="/Personal" element={<Personal />} />{" "}
-        {/* Redirect to Dashboard for any other route */}
+        <Route path="/Personal" element={<Personal />} />
       </Routes>
     </Router>
   );
