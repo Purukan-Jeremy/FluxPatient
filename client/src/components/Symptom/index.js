@@ -113,9 +113,9 @@ const SymptomChecker = () => {
             </div>
           ))
         ) : (
-          <p style={{ width: "100%", paddingLeft: "670px" }}>
-            No symptoms found.
-          </p>
+          <div className="not_found">
+            <p className="no_doctor"> No Symptom Founds</p>
+          </div>
         )}
       </div>
     </div>

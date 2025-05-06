@@ -1,8 +1,21 @@
 .doctor-detail-page {
+  margin-top: 11rem;
   min-height: 100vh;
   font-family: sans-serif;
 }
 
+.status {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.status.available {
+  color: rgb(0, 255, 0);
+}
+
+.status.unavailable {
+  color: red;
+}
 .doctor-card-detail {
   display: flex;
   align-items: center;
@@ -33,11 +46,7 @@
   margin: 0.25rem 0;
 }
 
-.status {
-  color: #10b981; /* Tailwind green-500 */
-  font-weight: 600;
-  margin-top: 0.5rem;
-}
+
 
 .appointment-button {
   background-color: #111827;
