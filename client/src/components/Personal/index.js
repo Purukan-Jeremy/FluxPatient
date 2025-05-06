@@ -50,7 +50,7 @@ const Personal = () => {
       const pasienResult = await pasienResponse.json();
       console.log("Respons dari backend:", pasienResult); // Debugging
       alert("Kamu Telah Ditambahkan Di antrian!");
-      navigate("/Queue");
+      navigate("/Queue", { state: { pasien: formData } });
     } catch (error) {
       console.error("Error submitting data:", error.message);
       alert(`Failed to submit: ${error.message}`);
