@@ -8,6 +8,23 @@
   overflow: hidden;
 }
 
+.not_found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px; /* cukup untuk tampilan kecil */
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  grid-column: 1 / -1;
+}
+
+.no_doctor {
+  font-size: clamp(16px, 4vw, 24px); /* responsif tergantung layar */
+  font-weight: 600;
+  color: #000000;
+}
 .symptom-grid {
   display: grid; 
   grid-template-columns: repeat(2, 1fr);
