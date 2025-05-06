@@ -1,42 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../assets/styles/DoctorsComponent.css";
-import gambar from "../../assets/img/gambar.jpg";
+import axios from "axios";
 import Header from "../Header";
-
-const doctors = [
-  { name: "dr. Richard Lee", specialty: "DERMATOLOGIST", image: gambar },
-  { name: "dr. Theo M. Hudi", specialty: "GASTROENTEROLOGIST", image: gambar },
-  { name: "dr. Alimni Anaya", specialty: "NEUROLOGY", image: gambar },
-  { name: "dr. Hilda Pilar", specialty: "CARDIOLOGIST", image: gambar },
-  { name: "dr. Marcel Sornpton", specialty: "OPHTALMOLOGIST", image: gambar },
-  { name: "dr. Matthew Molekulanang", specialty: "PEDIATRICIAN", image: gambar },
-  { name: "dr. Pichan Molekilang", specialty: "PSYCHIATRIST", image: gambar },
-  { name: "dr. Harah Away", specialty: "ONCOLOGIST", image: gambar },
-];
-
-const DoctorCard = ({ name, specialty, image, onSchedule }) => (
-  <div className="doctor-card">
-    <img src={image} alt={name} className="doctor-image" />
-    <h3 className="doctor-name">{name}</h3>
-    <p className="doctor-specialty">{specialty}</p>
-    <button className="schedule-button" onClick={onSchedule}>
-      Schedule
-    </button>
-  </div>
-);
+import "./../../assets/styles/DoctorsComponent.css";
+import DoctorImage from "./../../assets/img/gambar.jpg"; 
 
 const Doctors = () => {
+  const [doctors, setDoctors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/doctors");
+        setDoctors(response.data.data);
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      }
+    };
+
+    fetchDoctors();
+  }, []);
 
   const handleSchedule = (doctor) => {
-    navigate("/DoctorsProfile", { state: { doctor } });
+    const doctorData = {
+      name: doctor.nama,
+      specialty: doctor.spesialis,
+      schedule: doctor.jadwal_praktik,
+      availability: doctor.status_ketersediaan,
+      image: DoctorImage, 
+    };
+    navigate("/DoctorsP", { state: { doctor: doctorData } });
   };
 
-  const filteredDoctors = doctors.filter((doc) =>
-    doc.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    doc.specialty.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredDoctors = doctors.filter(
+    (doctor) =>
+      (doctor.nama &&
+        doctor.nama.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (doctor.spesialis &&
+        doctor.spesialis.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
@@ -46,17 +49,28 @@ const Doctors = () => {
         setSearchTerm={setSearchTerm}
         title="Meet Our Doctors"
       />
-
       <div className="doctors-grid">
-        {filteredDoctors.map((doc, index) => (
-          <DoctorCard
-            key={index}
-            name={doc.name}
-            specialty={doc.specialty}
-            image={doc.image}
-            onSchedule={() => handleSchedule(doc)}
-          />
-        ))}
+        {filteredDoctors.length > 0 ? (
+          filteredDoctors.map((doctor, index) => (
+            <div key={index} className="doctor-card">
+              <img
+                src={DoctorImage}
+                alt={doctor.nama}
+                className="doctor-image"
+              />
+              <h3 className="doctor-name">{doctor.nama}</h3>
+              <p className="doctor-specialty">{doctor.spesialis}</p>
+              <button
+                className="schedule-button"
+                onClick={() => handleSchedule(doctor)}
+              >
+                Schedule
+              </button>
+            </div>
+          ))
+        ) : (
+          <p>No doctors found.</p>
+        )}
       </div>
     </div>
   );

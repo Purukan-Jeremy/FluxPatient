@@ -1,10 +1,11 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/DoctorsProfileStyle.css";
 import Header from "../Header";
 
 const DoctorDetail = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const doctor = location.state?.doctor;
 
   if (!doctor) {
@@ -16,6 +17,15 @@ const DoctorDetail = () => {
     );
   }
 
+  const handleAppointment = () => {
+    navigate("/", { state: { doctor } });
+  };
+
+  const statusClass =
+    doctor.availability?.toLowerCase() === "tersedia"
+      ? "status available"
+      : "status unavailable";
+
   return (
     <div className="doctor-detail-page">
       <Header title="Meet Our Doctors" />
@@ -25,9 +35,11 @@ const DoctorDetail = () => {
         <div className="doctor-info-detail">
           <h3>{doctor.name}</h3>
           <p>{doctor.specialty}</p>
-          <p>Tuesday - Friday 10.00 AM - 16.00 PM</p>
-          <p className="status">Available</p>
-          <button className="appointment-button">Make an appointment</button>
+          <p>{doctor.schedule}</p>
+          <p className={statusClass}>{doctor.availability}</p>
+          <button className="appointment-button" onClick={handleAppointment}>
+            Make an appointment
+          </button>
         </div>
       </div>
     </div>
