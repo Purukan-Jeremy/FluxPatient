@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard/index.js";
 import Doctors from "./components/Doctors/index.js";
 import Queue from "./components/Queue/index.js";
 import Symptom from "./components/Symptom/index.js";
+import DoctorsP from "./components/DoctorsProfile/index.js";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/Doctors" element={<Doctors />} />
         <Route path="/Queue" element={<Queue />} />
         <Route path="/Symptom" element={<Symptom />} />
+        <Route path="/DoctorsP" element={<DoctorsP />} />
       </Routes>
     </Router>
   );

@@ -1,18 +1,30 @@
 import React from "react";
-import DoctorsProfileStyle from "../../assets/styles/DoctorsProfileStyle.css"; // Ganti dengan path CSS yang sesuai
-import gambar from "../../assets/img/gambar.jpg"; // ganti dengan path gambar yang sesuai
+import { useLocation } from "react-router-dom";
+import "../../assets/styles/DoctorsProfileStyle.css";
 import Header from "../Header";
 
 const DoctorDetail = () => {
+  const location = useLocation();
+  const doctor = location.state?.doctor;
+
+  if (!doctor) {
+    return (
+      <div className="doctor-detail-page">
+        <Header title="Meet Our Doctors" />
+        <p style={{ padding: "20px" }}>No doctor data available.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="doctor-detail-page">
       <Header title="Meet Our Doctors" />
 
       <div className="doctor-card-detail">
-        <img src={gambar} alt="dr. Steve Umbas" className="doctor-photo" />
+        <img src={doctor.image} alt={doctor.name} className="doctor-photo" />
         <div className="doctor-info-detail">
-          <h3>dr. Steve Umbas</h3>
-          <p>Dermatologist</p>
+          <h3>{doctor.name}</h3>
+          <p>{doctor.specialty}</p>
           <p>Tuesday - Friday 10.00 AM - 16.00 PM</p>
           <p className="status">Available</p>
           <button className="appointment-button">Make an appointment</button>
