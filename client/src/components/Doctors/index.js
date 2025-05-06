@@ -1,78 +1,56 @@
-import React from "react";
-import DoctorsComponent from "../../assets/styles/DoctorsComponent.css";
-
-const doctors = [
-  {
-    name: "dr. Richard Lee",
-    specialty: "DERMATOLOGIST",
-    image: "./assets/gambar.jpg",
-  },
-  {
-    name: "dr. Theo M. Hudi",
-    specialty: "GASTROENTEROLOGIST",
-    image: "./assets/gambar.jpg",
-  },
-  {
-    name: "dr. Alimni Anaya",
-    specialty: "NEUROLOGY",
-    image: "./assets/gambar.jpg",
-  },
-  {
-    name: "dr. Hilda Pilar",
-    specialty: "CARDIOLOGIST",
-    image: "./assets/gambar.jpg",
-  },
-  {
-    name: "dr. Marcel Sornpton",
-    specialty: "OPHTALMOLOGIST",
-    image: "./assets/gambar.jpg",
-  },
-  {
-    name: "dr. Matthew Molekulanang",
-    specialty: "PEDIATRICIAN",
-    image: "./assets/gambar.jpg",
-  },
-  {
-    name: "dr. Pichan Molekilang",
-    specialty: "PSYCHIATRIST",
-    image: "./assets/gambar.jpg",
-  },
-  {
-    name: "dr. Harah Away",
-    specialty: "ONCOLOGIST",
-    image: "./assets/gambar.jpg",
-  },
-];
-
-const DoctorCard = ({ name, specialty, image }) => (
-  <div className="doctor-card">
-    <img src={image} alt={name} className="doctor-image" />
-    <h3 className="doctor-name">{name}</h3>
-    <p className="doctor-specialty">{specialty}</p>
-    <button className="schedule-button">Schedule</button>
-  </div>
-);
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Header from "../Header";
+import "./../../assets/styles/DoctorsComponent.css";
+import Doctor from "./../../assets/img/gambar.jpg";
 
 const Doctors = () => {
+  const [doctors, setDoctors] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/doctors");
+        console.log("Fetched doctors data:", response.data.data); // Debug log
+        setDoctors(response.data.data);
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      }
+    };
+
+    fetchDoctors();
+  }, []);
+
+  const filteredDoctors = doctors.filter((doctor) =>
+    (doctor.nama && doctor.nama.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    (doctor.spesialis && doctor.spesialis.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
   return (
     <div className="page-container">
-      <header className="header">
-        <div className="logo">+ </div>
-        <input type="text" placeholder="Search..." className="search-bar" />
-        <div className="profile-icon" />
-      </header>
-
-      <h2 className="page-title">Meet Our Doctors</h2>
-
+      <Header
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        title="Meet Our Doctors"
+      />
       <div className="doctors-grid">
-        {doctors.map((doc, index) => (
-          <DoctorCard
-            key={index}
-            name={doc.name}
-            specialty={doc.specialty}
-            image={doc.image}
-          />
-        ))}
+        {filteredDoctors.length > 0 ? (
+          filteredDoctors.map((doctor, index) => (
+            <div key={index} className="doctor-card">
+              <img
+                src={Doctor}
+                alt={doctor.nama}
+                className="doctor-image"
+              />
+              <h3 className="doctor-name">{doctor.nama}</h3>
+              <p className="doctor-specialty">{doctor.spesialis}</p>
+              <button className="schedule-button">Schedule</button>
+            </div>
+          ))
+        ) : (
+          <p>No doctors found.</p>
+        )}
       </div>
     </div>
   );

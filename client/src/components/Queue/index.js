@@ -5,6 +5,7 @@ import Navbar from "../Navbar";
 import Home from "../Home";
 import Footer from "../Footer";
 import "../../assets/styles/QueueComponent.css";
+import { useNavigate } from "react-router-dom";
 
 const queueData = [
   {
