@@ -23,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api", usersController);
 app.use("/api/symptoms", symptomsController);
+app.use("/api/user", usersController);
 app.use("/api/pemeriksaan", pemeriksaanController);
 app.use("/api/doctors", doctorsController);
 

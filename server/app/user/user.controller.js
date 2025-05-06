@@ -1,5 +1,4 @@
-//Layer controller untuk handle req dan res
-// Validasi body
+// Layer controller untuk handle req dan res
 
 const express = require("express");
 const router = express.Router();
@@ -16,26 +15,26 @@ router.get("/pasien", async (req, res, next) => {
   try {
     const pasiens = await getAllPasiens();
     res.json({
-      status: "success!!!",
+      status: "success",
       message: "list pasien",
       data: pasiens,
     });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).json({ status: "error", message: error.message });
   }
 });
 
 router.get("/pasien/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
-    const pasiens = await getPasienById(id);
+    const pasien = await getPasienById(id);
     res.json({
       status: "success",
-      message: "list pasien",
-      data: pasiens,
+      message: "detail pasien",
+      data: pasien,
     });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(404).json({ status: "error", message: error.message });
   }
 });
 
@@ -45,11 +44,12 @@ router.post("/pasien", async (req, res) => {
     const newPasien = await createPasien(req.body);
     res.status(201).json({
       status: "success",
-      message: "pasien berhasil ditambahkan",
+      message: "Data pasien berhasil ditambahkan",
       data: newPasien,
     });
   } catch (error) {
-    res.status(400).send(error.message);
+    console.error("Error di backend:", error.message);
+    res.status(400).json({ status: "error", message: error.message });
   }
 });
 
@@ -64,7 +64,7 @@ router.delete("/pasien/:id", async (req, res) => {
       data: deleted,
     });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(404).json({ status: "error", message: error.message });
   }
 });
 
@@ -79,7 +79,7 @@ router.put("/pasien/:id", async (req, res) => {
       data: updated,
     });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(404).json({ status: "error", message: error.message });
   }
 });
 

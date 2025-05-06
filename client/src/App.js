@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard/index.js";
 import Doctors from "./components/Doctors/index.js";
 import Queue from "./components/Queue/index.js";
 import Symptom from "./components/Symptom/index.js";
+import Personal from "./components/Personal/index.js"; // Import the Personal component
 
 const App = () => {
   return (
@@ -13,6 +14,8 @@ const App = () => {
         <Route path="/Doctors" element={<Doctors />} />
         <Route path="/Queue" element={<Queue />} />
         <Route path="/Symptom" element={<Symptom />} />
+        <Route path="/Personal" element={<Personal />} />{" "}
+        {/* Redirect to Dashboard for any other route */}
       </Routes>
     </Router>
   );

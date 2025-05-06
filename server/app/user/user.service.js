@@ -15,21 +15,23 @@ const getAllPasiens = async () => {
 };
 
 const getPasienById = async (id) => {
-  const pasiens = await findById(id);
-  if (!pasiens) {
-    throw Error("User tidak ditemukan");
+  const pasien = await findById(id);
+  if (!pasien) {
+    throw Error("Pasien tidak ditemukan");
   }
-  return pasiens;
+  return pasien;
 };
 
 const createPasien = async (data) => {
+  // Validate required fields
   if (
     !data.nama ||
-    !data.tanggallahir ||
     !data.alamat ||
     !data.umur ||
     !data.hp ||
-    !data.gender
+    !data.gender ||
+    !data.treatment ||
+    !data.deskripsi
   ) {
     throw Error("Data pasien tidak lengkap");
   }
