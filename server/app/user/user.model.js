@@ -4,11 +4,12 @@ const mongoose = require("mongoose");
 const pasienSchema = mongoose.Schema(
   {
     nama: { type: String, required: true },
-    tanggallahir: String,
-    alamat: String,
-    umur: Number,
-    hp: String,
-    gender: String,
+    alamat: { type: String, required: true },
+    umur: { type: Number, required: true },
+    hp: { type: String, required: true },
+    gender: { type: String, required: true },
+    treatment: { type: String, required: true },
+    deskripsi: { type: String, required: true },
   },
   {
     versionKey: false,
