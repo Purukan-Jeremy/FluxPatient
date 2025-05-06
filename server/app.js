@@ -8,8 +8,8 @@ const connectDB = require("./database");
 
 const usersController = require("./app/user/user.controller");
 const symptomsController = require("./app/symptom/symptom.controller");
-const pemeriksaanController = require("./app/pemeriksaan/pemeriksaan.controller");
 const doctorsController = require("./app/doctors/doctors.controller");
+const queueController = require("./app/queue/queue.controller");
 
 const app = express();
 connectDB();
@@ -23,9 +23,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api", usersController);
 app.use("/api/symptoms", symptomsController);
-app.use("/api/user", usersController);
-app.use("/api/pemeriksaan", pemeriksaanController);
 app.use("/api/doctors", doctorsController);
+app.use("/api/queue", queueController);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
